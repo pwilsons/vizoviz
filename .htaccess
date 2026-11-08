@@ -1,0 +1,21 @@
+AddDefaultCharset UTF-8
+Options -Indexes
+ErrorDocument 404 /index.html
+
+# Old PHP addresses -> new static pages (keeps search rankings)
+RewriteEngine On
+RewriteRule ^index\.php$ / [R=301,L]
+RewriteRule ^(en|zh)/index\.php$ /$1/ [R=301,L]
+RewriteRule ^contact\.php$ /#contact [R=301,NE,L]
+RewriteRule ^(en|zh)/contact\.php$ /$1/#contact [R=301,NE,L]
+RewriteRule ^(privacy|terms)\.php$ /$1.html [R=301,L]
+RewriteRule ^(en|zh)/(privacy|terms)\.php$ /$1/$2.html [R=301,L]
+RewriteRule ^consent\.php$ /privacy.html [R=301,L]
+RewriteRule ^(en|zh)/consent\.php$ /$1/privacy.html [R=301,L]
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
